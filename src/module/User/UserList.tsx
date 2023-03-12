@@ -1,10 +1,17 @@
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
 import { ApiStatus, IUser } from "./User.type";
 import { MutatingDots } from "react-loader-spinner";
+import { useEffect } from 'react';
+import { getUserListAction } from './UserSlice';
 
 const UserList = () => {
   const { list, listStatus } = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getUserListAction())
+  }, [])
 
   if (listStatus === ApiStatus.loading) {
     return (
