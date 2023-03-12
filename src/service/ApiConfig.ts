@@ -1,7 +1,7 @@
-const baseUrl = "https://fakestoreapi.com/"
+const baseUrl = "http://localhost:8000/"
 
 const ApiConfig = {
-  user: `${baseUrl}users`
+  user: `${baseUrl}user`
 }
 
 export default ApiConfig;
