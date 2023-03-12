@@ -4,4 +4,4 @@ const ApiConfig = {
   user: `${baseUrl}users`
 }
 
-export default ApiConfig
+export default ApiConfig;
