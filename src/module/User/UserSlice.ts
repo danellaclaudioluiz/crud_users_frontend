@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ApiStatus, IUser, IUserForm, IUserState } from "./User.type";
-import { getUserListApi, registerUserApi } from "./UserService";
+import { deleteUserApi, getUserListApi, registerUserApi } from "./UserService";
 
 const initialState: IUserState = {
   list: [],
@@ -17,10 +17,18 @@ export const getUserListAction = createAsyncThunk(
 );
 
 export const registerUserAction = createAsyncThunk(
-  "user/registerUserListAction",
+  "user/registerUserAction",
   async (data: IUserForm) => {
     const response = await registerUserApi(data);
     return response.data;
+  }
+);
+
+export const deleteUserAction = createAsyncThunk(
+  "user/deleteUserAction",
+  async (id: number) => {
+    const response = await deleteUserApi(id);
+    return id;
   }
 );
 
@@ -53,6 +61,13 @@ const userSlice = createSlice({
     builder.addCase(registerUserAction.rejected, (state) => {
       state.createUserFormStatus = ApiStatus.error;
     });
+
+
+    builder.addCase(deleteUserAction.fulfilled, (state, action) => {
+      const newList = state.list.filter(x => x.id !== action.payload)
+      state.list = newList;
+    });
+
   },
 });
 

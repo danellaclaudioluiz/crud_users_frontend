@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 import { ApiStatus, IUser } from "./User.type";
 import { MutatingDots } from "react-loader-spinner";
 import { useEffect, useState } from "react";
-import { getUserListAction } from "./UserSlice";
+import { deleteUserAction, getUserListAction } from "./UserSlice";
 import { Modal } from "../../components/Modal";
 import Style from "./UserListStyle.module.css";
 
@@ -84,18 +84,13 @@ const UserList = () => {
                     >
                       View
                     </button>
-                    <button
-                      className={Style.menu}
-                      onClick={() => {
-
-                      }}
-                    >
+                    <button className={Style.menu} onClick={() => { }}>
                       Edit
                     </button>
                     <button
                       className={Style.menu}
                       onClick={() => {
-
+                        dispatch(deleteUserAction(user.id));
                       }}
                     >
                       Delete
