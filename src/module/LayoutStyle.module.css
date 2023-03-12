@@ -1,8 +1,15 @@
 .header {
   height: 70px;
-  background-color: darkviolet;
+  background-color: #9f7aaf;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: larger;
+}
+
+.content-section{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20px;
 }

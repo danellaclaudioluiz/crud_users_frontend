@@ -1,9 +1,19 @@
+import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './module/Layout';
+import UserForm from './module/User/UserForm';
+import UserList from './module/User/UserList';
 
 function App() {
   return (
-    <Layout />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<UserList />}></Route>
+          <Route path='/register' element={<UserForm />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
