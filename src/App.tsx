@@ -10,7 +10,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<UserList />}></Route>
-          <Route path='/register' element={<UserForm />}></Route>
+          <Route path='/user/register' element={<UserForm />}></Route>
+          <Route path='/user/update' element={<UserForm />}></Route>
+
         </Route>
       </Routes>
     </BrowserRouter>

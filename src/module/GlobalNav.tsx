@@ -11,7 +11,7 @@ const GlobalNav = () => {
     },
     {
       id: 2,
-      to: "/register",
+      to: "/user/register",
       value: "Register User"
     }
   ]
