@@ -1,12 +1,19 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { Input } from "../../components/Input/Index";
-import { ApiStatus, IUser, IUserForm } from './User.type';
+import { ApiStatus, IUpdateUserActionProps, IUser, IUserForm } from './User.type';
 import Style from "./UserFormStyle.module.css";
-import { registerUserAction, resetCreateListStatus } from './UserSlice';
+import { registerUserAction, resetCreateListStatus, updateUserAction } from './UserSlice';
+import { useNavigate, useParams } from 'react-router-dom'
 
-const UserForm = () => {
+interface IProps {
+  isEditForm?: boolean;
+}
+
+const UserForm = (props: IProps) => {
+  const { isEditForm } = props
+
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,9 +29,37 @@ const UserForm = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
 
-  const { createUserFormStatus } = useAppSelector((state: RootState) => state.user)
+  const params = useParams()
+  const userId = useRef(parseInt(params.id || ""))
+
+  const { list } = useAppSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    if (isEditForm && userId.current) {
+      const userData = list.filter(x => x.id === userId.current)
+
+      if (userData.length) {
+        setUserName(userData[0].username)
+        setEmail(userData[0].email)
+        setFirstName(userData[0].name.firstname)
+        setLastName(userData[0].name.lastname)
+        setPhone(userData[0].phone)
+        setZipcode(userData[0].address.zipcode)
+        setStreet(userData[0].address.street)
+        setStreetNumber(userData[0].address.number)
+        setDistrict(userData[0].address.district)
+        setCity(userData[0].address.city)
+        setState(userData[0].address.estate)
+        setCountry(userData[0].address.country)
+      }
+    }
+  }, [isEditForm])
+
+  const { createUserFormStatus, updateUserFormStatus } = useAppSelector((state: RootState) => state.user)
 
   const dispatch = useAppDispatch()
+
+  const navigate = useNavigate()
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,13 +67,16 @@ const UserForm = () => {
     const data: IUserForm = {
       email,
       username: userName,
-      password,
+      password: "01234567",
       name: {
         firstname: firstName,
         lastname: lastName,
       },
       address: {
         city,
+        estate: state,
+        district,
+        country,
         street,
         number: streetNumber,
         zipcode,
@@ -47,10 +85,41 @@ const UserForm = () => {
           long: "0"
         }
       },
-      phone
+      phone,
     }
 
-    dispatch(registerUserAction(data))
+    if (isEditForm) {
+      const dirtyFormData: IUpdateUserActionProps = { id: userId.current, data }
+      dispatch(updateUserAction(dirtyFormData))
+      navigate("/")
+    } else {
+      const data: IUserForm = {
+        email,
+        username: userName,
+        password,
+        name: {
+          firstname: firstName,
+          lastname: lastName,
+        },
+        address: {
+          city,
+          estate: state,
+          district,
+          country,
+          street,
+          number: streetNumber,
+          zipcode,
+          geolocation: {
+            lat: "0",
+            long: "0"
+          }
+        },
+        phone
+      }
+      dispatch(registerUserAction(data))
+      navigate("/")
+    }
+
   }
 
   useEffect(() => {
@@ -192,7 +261,9 @@ const UserForm = () => {
         />
 
         <div>
-          <input type="submit" value="Register User" />
+          <input type="submit" value={isEditForm ? "Update User" : "Register User"}
+            disabled={createUserFormStatus === ApiStatus.loading || updateUserFormStatus === ApiStatus.loading}
+          />
         </div>
       </form>
     </div>

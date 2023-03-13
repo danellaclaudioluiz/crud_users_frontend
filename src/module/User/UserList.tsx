@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import { deleteUserAction, getUserListAction } from "./UserSlice";
 import { Modal } from "../../components/Modal";
 import Style from "./UserListStyle.module.css";
+import { useNavigate } from 'react-router-dom'
 
 const UserList = () => {
   const [userDataToView, setUserDataToView] = useState<IUser | null>(null);
   const { list, listStatus } = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     dispatch(getUserListAction());
@@ -84,7 +87,9 @@ const UserList = () => {
                     >
                       View
                     </button>
-                    <button className={Style.menu} onClick={() => { }}>
+                    <button className={Style.menu} onClick={() => {
+                      navigator(`/user/edit/${user.id}`)
+                    }}>
                       Edit
                     </button>
                     <button
@@ -136,7 +141,11 @@ const UserList = () => {
                   " " +
                   userDataToView.address.number +
                   " " +
-                  userDataToView.address.city}
+                  userDataToView.address.city +
+                  " " +
+                  userDataToView.address.estate +
+                  " " +
+                  userDataToView.address.country}
               </label>
             </div>
 

@@ -12,7 +12,7 @@ function App() {
           <Route index element={<UserList />}></Route>
           <Route path='/user/register' element={<UserForm />}></Route>
           <Route path='/user/update' element={<UserForm />}></Route>
-
+          <Route path='/user/edit/:id' element={<UserForm isEditForm={true} />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

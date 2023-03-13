@@ -1,25 +1,100 @@
 {
   "user": [
     {
-      "id": 1,
       "email": "John@gmail.com",
-      "username": "johnd",
-      "password": "m38rmF$",
+      "username": "Carolina Rosa de Menezes",
+      "password": "01234567",
       "name": {
         "firstname": "John",
         "lastname": "Doe"
       },
       "address": {
         "city": "kilcoole",
+        "estate": "SP",
+        "district": "san diego",
+        "country": "BRazil",
         "street": "7835 new road",
         "number": 3,
         "zipcode": "12926-3874",
         "geolocation": {
-          "lat": "-37.3159",
-          "long": "81.1496"
+          "lat": "0",
+          "long": "0"
         }
       },
-      "phone": "1-570-236-7033"
+      "phone": "1-570-236-7033",
+      "id": 3
+    },
+    {
+      "email": "John@gmail.com",
+      "username": "johnd",
+      "password": "",
+      "name": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "address": {
+        "city": "kilcoole",
+        "estate": "BR",
+        "district": "São Paulo",
+        "country": "Brasil",
+        "street": "7835 new road",
+        "number": 3,
+        "zipcode": "12926-3874",
+        "geolocation": {
+          "lat": "0",
+          "long": "0"
+        }
+      },
+      "phone": "1-570-236-7033",
+      "id": 4
+    },
+    {
+      "email": "carol@gmail.com",
+      "username": "Carolas",
+      "password": "123",
+      "name": {
+        "firstname": "Carolina Rosa",
+        "lastname": "Menezes Pugliele"
+      },
+      "address": {
+        "city": "São Paulo",
+        "estate": "SP",
+        "district": "Bela Vista",
+        "country": "Brazil",
+        "street": "RUa Genebra",
+        "number": "296",
+        "zipcode": "01316010",
+        "geolocation": {
+          "lat": "0",
+          "long": "0"
+        }
+      },
+      "phone": "11966189561",
+      "id": 5
+    },
+    {
+      "email": "dsdada@sadsad.com",
+      "username": "sfaf",
+      "password": "sdsadsa",
+      "name": {
+        "firstname": "dsadsads",
+        "lastname": "adsadsa"
+      },
+      "address": {
+        "city": "",
+        "estate": "",
+        "district": "",
+        "country": "",
+        "street": "",
+        "number": "",
+        "zipcode": "",
+        "geolocation": {
+          "lat": "0",
+          "long": "0"
+        }
+      },
+      "phone": "",
+      "id": 6
     }
   ]
 }
